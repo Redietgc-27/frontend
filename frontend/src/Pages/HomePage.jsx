@@ -8,11 +8,7 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md";
 const HomePage = () => {
   const [query, setQuery] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [checkBox, setCheckBox] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const [editIndex, setEditIndex] = useState(null);
-  const [editedText, setEditedText] = useState("");
 
   useEffect(() => {
     if (location.state?.newTask) {
@@ -31,15 +27,6 @@ const HomePage = () => {
     );
   };
 
-  const handleUpdateTask = (index) => {
-    setTasks((prev) =>
-      prev.map((task, i) =>
-        i === index ? { ...task, text: editedText } : task
-      )
-    );
-    setEditIndex(null);
-    setEditedText("");
-  };
   const handleDeleteTask = (index) => {
     setTasks((prev) => prev.filter((_, i) => i !== index));
   };
@@ -87,15 +74,6 @@ const HomePage = () => {
                   <MdCheckBoxOutlineBlank />
                 )}
                 <span className="col-8 ">{task.text}</span>
-                <button
-                  className="btn btn-warning btn-sm me-2"
-                  onClick={() => {
-                    setEditIndex(idx);
-                    setEditedText(task.text);
-                  }}
-                >
-                  Edit
-                </button>
 
                 <button
                   onClick={() => handleDeleteTask(idx)}
