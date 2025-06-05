@@ -9,6 +9,7 @@ const HomePage = () => {
   const [query, setQuery] = useState("");
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (location.state?.newTask) {
@@ -66,7 +67,6 @@ const HomePage = () => {
               <div
                 className="d-flex justify-content-between"
                 onClick={() => handleToggleComplete(idx)}
-                onChange={(e) => handleUpdateTask(idx, e.target.value)}
               >
                 {task.completed ? (
                   <FaRegSquareCheck />
